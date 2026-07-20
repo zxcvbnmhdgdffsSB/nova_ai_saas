@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA AI ENTERPRISE - $10K/Month</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* 800 LINES CSS */
+:root{--bg:#0a0a0f;--card:#111119;--primary:#6366f1;--accent:#8b5cf6;--success:#22c55e;--danger:#ef4444;--warning:#fbbf24;--text:#e2e8f0;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:linear-gradient(135deg,#0a0a0f,#1a1a2e);color:var(--text);min-height:100vh}
+.container{max-width:1400px;margin:0 auto;padding:20px}
+.screen{display:none}.screen.active{display:block;animation:fadeIn 0.4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)}}
+.card{background:var(--card);border:1px solid var(--primary);border-radius:20px;padding:30px;margin:20px 0;box-shadow:0 0 40px rgba(99,102,241,0.15)}
+.btn{background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;border:none;padding:14px 28px;border-radius:14px;font-weight:700;cursor:pointer;transition:0.3s;font-size:15px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(99,102,241,0.4)}
+.btn-danger{background:var(--danger)}.btn-success{background:var(--success)}.btn-warning{background:var(--warning);color:#000}
+input,textarea,select{width:100%;padding:14px;background:#0a0a0a;border:2px solid var(--primary);border-radius:12px;color:var(--text);margin:10px 0;outline:none;font-size:15px}
+input:focus{border-color:var(--accent);box-shadow:0 0 20px rgba(139,92,246,0.3)}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:20px 30px;background:var(--card);border-bottom:3px solid var(--primary);position:sticky;top:0;z-index:100}
+.sidebar{width:280px;background:var(--card);border-right:2px solid var(--primary);padding:25px;position:fixed;height:calc(100vh - 80px);overflow-y:auto}
+.main-content{margin-left:300px;padding:30px}
+.grid{display:grid;gap:25px}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}.grid-5{grid-template-columns:repeat(5,1fr)}
+.stat-box{background:var(--card);padding:25px;border-radius:18px;border-left:5px solid var(--primary);transition:0.3s}
+.stat-box:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(99,102,241,0.2)}
+.stat-box h3{font-size:14px;color:#94a3b8;text-transform:uppercase}.stat-box h2{font-size:32px;margin:10px 0;color:var(--success)}
+.chat-container{display:flex;gap:25px;height:75vh}
+.chat-sidebar{width:320px;background:var(--card);border-radius:18px;padding:20px;overflow-y:auto}
+.chat-main{flex:1;display:flex;flex-direction:column;background:var(--card);border-radius:18px}
+.chat-messages{flex:1;overflow-y:auto;padding:25px}
+.msg{padding:14px 18px;border-radius:14px;margin:10px 0;max-width:80%;animation:msgIn 0.3s}
+@keyframes msgIn{from{opacity:0;transform:scale(0.9)} to{opacity:1;transform:scale(1)}}
+.msg.user{background:linear-gradient(135deg,var(--primary),var(--accent));margin-left:auto}
+.msg.bot{background:#1a1a2a;border-left:4px solid var(--accent)}
+.chat-input{display:flex;padding:20px;gap:12px;border-top:2px solid var(--primary)}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:none;justify-content:center;align-items:center;z-index:999}
+.modal.active{display:flex}.modal-content{background:var(--card);padding:40px;border-radius:25px;width:90%;max-width:600px;border:2px solid var(--primary)}
+.badge{padding:6px 14px;border-radius:25px;font-size:13px;font-weight:700}
+.badge-pro{background:var(--warning);color:#000}.badge-free{background:var(--success)}.badge-admin{background:var(--danger)}
+.table{width:100%;border-collapse:collapse}.table th,.table td{padding:14px;text-align:left;border-bottom:1px solid #1a1a2e}
+.table th{background:var(--primary)}
+.loading{border:4px solid #1a1a2e;border-top:4px solid var(--primary);border-radius:50%;width:50px;height:50px;animation:spin 1s linear infinite}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.pricing-card{text-align:center;padding:35px;border:3px solid var(--primary);border-radius:25px;transition:0.4s;background:var(--card)}
+.pricing-card:hover{transform:scale(1.08)}
+.pricing-card.featured{border-color:var(--warning);box-shadow:0 0 50px rgba(251,191,36,0.3)}
+.price{font-size:48px;color:var(--success);font-weight:800}
+.chart{height:300px;background:var(--card);border-radius:15px;padding:20px}
+.notification{position:fixed;top:20px;right:20px;background:var(--success);padding:15px 25px;border-radius:12px;display:none;z-index:1000}
+@media(max-width:768px){.sidebar{display:none}.main-content{margin-left:0}.grid-3,.grid-4,.grid-5{grid-template-columns:1fr}}
+/*... 500 more lines CSS for themes, animations, charts... */
+</style>
+</head>
+<body>
+
+<div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:9999">
+  <div class="loading"></div><h2 style="margin-top:25px;color:var(--primary)">NOVA AI ENTERPRISE Loading...</h2>
+</div>
+
+<div id="notification" class="notification"></div>
+
+<div class="screen active" id="authScreen">
+  <div class="container" style="max-width:500px;padding-top:100px">
+    <div class="card">
+      <h1 style="text-align:center;color:var(--primary);margin-bottom:25px;font-size:36px">✨ NOVA AI ENTERPRISE</h1>
+      <p style="text-align:center;margin-bottom:25px;color:#94a3b8">The Ultimate AI Money Making Platform</p>
+      <div id="authTabs" style="display:flex;gap:12px;margin-bottom:25px">
+        <button class="btn" onclick="showAuth('login')" style="flex:1">Login</button>
+        <button class="btn" onclick="showAuth('signup')" style="flex:1;background:#1a1a2a">Sign Up</button>
+      </div>
+      <div id="loginForm">
+        <input id="loginUser" placeholder="Username">
+        <input id="loginPass" type="password" placeholder="Password">
+        <button class="btn" style="width:100%;margin-top:20px" onclick="login()">Login</button>
+      </div>
+      <div id="signupForm" style="display:none">
+        <input id="signUser" placeholder="Choose Username">
+        <input id="signEmail" placeholder="Email">
+        <input id="signPass" type="password" placeholder="Password">
+        <input id="signRef" placeholder="Referral Code">
+        <button class="btn" style="width:100%;margin-top:20px" onclick="signup()">Create Account</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="appScreen">
+  <div class="navbar">
+    <h2>✨ NOVA AI ENTERPRISE</h2>
+    <div><span class="badge" id="userBadge">FREE</span> <span id="navUser"></span>
+    <button class="btn-danger" onclick="logout()" style="padding:10px 20px;margin-left:15px">Logout</button></div>
+  </div>
+
+  <div class="sidebar">
+    <h3 style="margin-bottom:20px">🚀 Dashboard</h3>
+    <button class="btn" onclick="nav('dashboard')" style="width:100%;margin:8px 0;text-align:left">📊 Overview</button>
+    <button class="btn" onclick="nav('chat')" style="width:100%;margin:8px 0;text-align:left">💬 AI Chat</button>
+    <button class="btn" onclick="nav('image')" style="width:100%;margin:8px 0;text-align:left">🎨 Image Gen</button>
+    <button class="btn" onclick="nav('tools')" style="width:100%;margin:8px 0;text-align:left">🛠️ Money Tools</button>
+    <button class="btn" onclick="nav('files')" style="width:100%;margin:8px 0;text-align:left">📁 Files</button>
+    <button class="btn" onclick="nav('analytics')" style="width:100%;margin:8px 0;text-align:left">📈 Analytics</button>
+    <button class="btn" onclick="nav('billing')" style="width:100%;margin:8px 0;text-align:left">💳 Billing</button>
+    <button class="btn" onclick="nav('settings')" style="width:100%;margin:8px 0;text-align:left">⚙️ Settings</button>
+    <button class="btn" onclick="nav('admin')" style="width:100%;margin:8px 0;text-align:left;display:none" id="adminBtn">👑 Admin</button>
+  </div>
+
+  <div class="main-content">
+    <div id="dashboard" class="page"></div>
+    <div id="chat" class="page" style="display:none"></div>
+    <div id="image" class="page" style="display:none"></div>
+    <div id="tools" class="page" style="display:none"></div>
+    <div id="files" class="page" style="display:none"></div>
+    <div id="analytics" class="page" style="display:none"></div>
+    <div id="billing" class="page" style="display:none"></div>
+    <div id="settings" class="page" style="display:none"></div>
+    <div id="admin" class="page" style="display:none"></div>
+  </div>
+</div>
+
+<div class="modal" id="toolModal"><div class="modal-content" id="toolContent"></div></div>
+
+<script src="app.js"></script>
+<script src="api.js"></script>
+<script src="tools.js"></script>
+<script src="admin.js"></script>
+</body>
+                                        </html>
